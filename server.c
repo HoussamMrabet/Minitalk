@@ -6,7 +6,7 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:21 by houbet            #+#    #+#             */
-/*   Updated: 2023/12/31 20:16:54 by hmrabet          ###   ########.fr       */
+/*   Updated: 2023/12/31 23:07:06 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ unsigned char	byte_to_char(char *byte)
 	return (c);
 }
 
-void	ft_append(int signal)
+static void	ft_append_bit(int signal)
 {
 	static char	byte[] = "00000000";
 	static int	i = 0;
@@ -56,8 +56,8 @@ void	ft_append(int signal)
 int	main(void)
 {
 	ft_printf("PID : %d\n", getpid());
-	signal(SIGUSR1, ft_append);
-	signal(SIGUSR2, ft_append);
+	signal(SIGUSR1, ft_append_bit);
+	signal(SIGUSR2, ft_append_bit);
 	while (1)
 		pause();
 	return (0);

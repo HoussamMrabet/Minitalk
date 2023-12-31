@@ -6,7 +6,7 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:26 by houbet            #+#    #+#             */
-/*   Updated: 2023/12/31 22:46:37 by hmrabet          ###   ########.fr       */
+/*   Updated: 2023/12/31 23:06:21 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ static int	check_inputs(int argc, char **argv)
 	i = 0;
 	if (argc != 3)
 		return (1);
-	while (argv[1][++i])
+	while (argv[1][i])
 	{
 		if (!ft_strchr("0123456789", argv[1][i]))
 			return (1);
+		i++;
 	}
 	return (0);
 }
 
-void	send_char(int id, unsigned char c)
+static void	send_char(int id, unsigned char c)
 {
 	int		i;
 	int		b;
@@ -63,8 +64,8 @@ int	main(int argc, char **argv)
 	id = ft_atoi(argv[1]);
 	if (id <= 0)
 	{
-		return (-1);
 		ft_printf("invalid PID!");
+		return (-1);
 	}
 	while (argv[2][i])
 	{
