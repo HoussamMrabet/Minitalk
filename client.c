@@ -6,11 +6,26 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:26 by houbet            #+#    #+#             */
-/*   Updated: 2023/12/31 20:15:53 by hmrabet          ###   ########.fr       */
+/*   Updated: 2023/12/31 22:46:37 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+static int	check_inputs(int argc, char **argv)
+{
+	int	i;
+
+	i = 0;
+	if (argc != 3)
+		return (1);
+	while (argv[1][++i])
+	{
+		if (!ft_strchr("0123456789", argv[1][i]))
+			return (1);
+	}
+	return (0);
+}
 
 void	send_char(int id, unsigned char c)
 {
@@ -39,12 +54,23 @@ int	main(int argc, char **argv)
 	int	i;
 	int	id;
 
+	i = 0;
+	if (check_inputs(argc, argv))
+	{
+		ft_printf("invalid input!\n");
+		return (-1);
+	}
 	id = ft_atoi(argv[1]);
-	i = argc - argc;
+	if (id <= 0)
+	{
+		return (-1);
+		ft_printf("invalid PID!");
+	}
 	while (argv[2][i])
 	{
 		send_char(id, argv[2][i]);
 		i++;
 	}
+	send_char(id, '\n');
 	return (0);
 }
