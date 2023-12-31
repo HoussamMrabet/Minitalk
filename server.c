@@ -6,7 +6,7 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:21 by houbet            #+#    #+#             */
-/*   Updated: 2023/12/31 19:12:18 by hmrabet          ###   ########.fr       */
+/*   Updated: 2023/12/31 20:16:54 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ unsigned char	byte_to_char(char *byte)
 	int				i;
 	int				b;
 
+	c = 0;
 	i = 0;
 	b = 128;
 	while (byte[i])
@@ -32,11 +33,9 @@ unsigned char	byte_to_char(char *byte)
 
 void	ft_append(int signal)
 {
-	static char	*byte = NULL;
+	static char	byte[] = "00000000";
 	static int	i = 0;
 
-	if (!byte)
-		byte = (char *)malloc(9);
 	if (signal == SIGUSR1)
 	{
 		byte[i] = '1';
@@ -51,8 +50,6 @@ void	ft_append(int signal)
 	{
 		ft_printf("%c", byte_to_char(byte));
 		i = 0;
-		free(byte);
-		byte = NULL;
 	}
 }
 
@@ -63,4 +60,5 @@ int	main(void)
 	signal(SIGUSR2, ft_append);
 	while (1)
 		pause();
+	return (0);
 }
