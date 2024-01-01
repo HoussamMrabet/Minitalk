@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:21 by hmrabet           #+#    #+#             */
-/*   Updated: 2024/01/01 14:04:54 by hmrabet          ###   ########.fr       */
+/*   Updated: 2024/01/01 14:07:14 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,22 @@ unsigned char	byte_to_char(char *byte)
 	return (c);
 }
 
-static void	ft_append_bit(int signal)
+static void	ft_append_bit(int signal, siginfo_t *info, void *context)
 {
 	static char	byte[] = "00000000";
 	static int	i = 0;
 
+	(void)context;
 	if (signal == SIGUSR1)
 	{
 		byte[i] = '1';
+		kill(info->si_pid, SIGUSR1);
 		i++;
 	}
 	else if (signal == SIGUSR2)
 	{
 		byte[i] = '0';
+		kill(info->si_pid, SIGUSR2);
 		i++;
 	}
 	if (i == 8)
@@ -51,13 +54,15 @@ static void	ft_append_bit(int signal)
 		ft_printf("%c", byte_to_char(byte));
 		i = 0;
 	}
+	usleep(800);
 }
 
 int	main(void)
 {
 	struct sigaction	siga;
 
-	siga.sa_handler = ft_append_bit;
+	siga.sa_sigaction = ft_append_bit;
+	siga.sa_flags = SA_SIGINFO;
 	sigemptyset(&siga.sa_mask);
 	sigaddset(&siga.sa_mask, SIGUSR1);
 	sigaddset(&siga.sa_mask, SIGUSR2);
