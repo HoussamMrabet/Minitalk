@@ -6,7 +6,7 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:13 by hmrabet           #+#    #+#             */
-/*   Updated: 2024/01/01 16:46:58 by hmrabet          ###   ########.fr       */
+/*   Updated: 2024/01/01 16:55:16 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "libft.h"
 # include "signal.h"
-# define TIMER 400
+# define TIMER 100
 
 #endif
