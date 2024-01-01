@@ -6,7 +6,7 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:26 by hmrabet           #+#    #+#             */
-/*   Updated: 2024/01/01 16:00:29 by hmrabet          ###   ########.fr       */
+/*   Updated: 2024/01/01 17:18:02 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ static void	send_char(int id, unsigned char c)
 void	feedback(int sig)
 {
 	if (sig == SIGUSR1)
-		ft_printf("SIGUSR1\n");
-	else if (sig == SIGUSR2)
-		ft_printf("SIGUSR2\n");
+	{
+		ft_printf("\033[1;92m[SUCCESS]");
+		ft_printf("\x1b[32m Message recieved by the server.\033[0m\n");
+	}
 }
 
 int	main(int argc, char **argv)
@@ -65,7 +66,6 @@ int	main(int argc, char **argv)
 
 	i = 0;
 	signal(SIGUSR1, feedback);
-	signal(SIGUSR2, feedback);
 	if (check_inputs(argc, argv))
 	{
 		ft_printf("\x1b[31minvalid input!\n\x1b[0m");

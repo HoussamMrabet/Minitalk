@@ -6,7 +6,7 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:21 by hmrabet           #+#    #+#             */
-/*   Updated: 2024/01/01 16:00:22 by hmrabet          ###   ########.fr       */
+/*   Updated: 2024/01/01 17:19:12 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@ static void	ft_append_bit(int signal, siginfo_t *info, void *context)
 	if (signal == SIGUSR1)
 	{
 		byte[i] = '1';
-		kill(info->si_pid, SIGUSR1);
 		i++;
 	}
 	else if (signal == SIGUSR2)
 	{
 		byte[i] = '0';
-		kill(info->si_pid, SIGUSR2);
 		i++;
 	}
 	if (i == 8)
 	{
+		if (byte_to_char(byte) == 0)
+			kill(info->si_pid, SIGUSR1);
 		ft_printf("%c", byte_to_char(byte));
 		i = 0;
 	}
