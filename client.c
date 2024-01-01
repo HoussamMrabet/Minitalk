@@ -6,7 +6,7 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:26 by hmrabet           #+#    #+#             */
-/*   Updated: 2024/01/01 14:05:07 by hmrabet          ###   ########.fr       */
+/*   Updated: 2024/01/01 15:57:18 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	send_char(int id, unsigned char c)
 			kill(id, SIGUSR2);
 		i++;
 		b /= 2;
-		usleep(800);
+		usleep(TIMER);
 	}
 }
 
@@ -74,5 +74,5 @@ int	main(int argc, char **argv)
 	}
 	send_char(id, '\0');
 	send_char(id, '\n');
-	exit(0);
+	return (0);
 }

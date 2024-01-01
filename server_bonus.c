@@ -6,11 +6,11 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:21 by hmrabet           #+#    #+#             */
-/*   Updated: 2024/01/01 14:07:14 by hmrabet          ###   ########.fr       */
+/*   Updated: 2024/01/01 16:00:22 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 unsigned char	byte_to_char(char *byte)
 {
@@ -54,7 +54,6 @@ static void	ft_append_bit(int signal, siginfo_t *info, void *context)
 		ft_printf("%c", byte_to_char(byte));
 		i = 0;
 	}
-	usleep(800);
 }
 
 int	main(void)
@@ -71,5 +70,5 @@ int	main(void)
 	sigaction(SIGUSR2, &siga, NULL);
 	while (1)
 		pause();
-	exit(0);
+	return (0);
 }

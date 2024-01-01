@@ -6,7 +6,7 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:21 by hmrabet           #+#    #+#             */
-/*   Updated: 2024/01/01 14:04:54 by hmrabet          ###   ########.fr       */
+/*   Updated: 2024/01/01 16:00:57 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ int	main(void)
 	sigaction(SIGUSR2, &siga, NULL);
 	while (1)
 		pause();
-	exit(0);
+	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:26 by hmrabet           #+#    #+#             */
-/*   Updated: 2024/01/01 14:08:00 by hmrabet          ###   ########.fr       */
+/*   Updated: 2024/01/01 16:00:29 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 static int	check_inputs(int argc, char **argv)
 {
@@ -46,15 +46,15 @@ static void	send_char(int id, unsigned char c)
 			kill(id, SIGUSR2);
 		i++;
 		b /= 2;
-		pause();
+		usleep(TIMER);
 	}
 }
 
-void feedback(int sig)
+void	feedback(int sig)
 {
-	if(sig == SIGUSR1)
+	if (sig == SIGUSR1)
 		ft_printf("SIGUSR1\n");
-	else if(sig == SIGUSR2)
+	else if (sig == SIGUSR2)
 		ft_printf("SIGUSR2\n");
 }
 
@@ -62,12 +62,10 @@ int	main(int argc, char **argv)
 {
 	int	i;
 	int	id;
-	struct sigaction	sa;
 
-	sa.sa_handler = feedback;
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
 	i = 0;
+	signal(SIGUSR1, feedback);
+	signal(SIGUSR2, feedback);
 	if (check_inputs(argc, argv))
 	{
 		ft_printf("\x1b[31minvalid input!\n\x1b[0m");
@@ -84,7 +82,7 @@ int	main(int argc, char **argv)
 		send_char(id, argv[2][i]);
 		i++;
 	}
-	send_char(id, '\n');
 	send_char(id, '\0');
-	exit(0);
+	send_char(id, '\n');
+	return (0);
 }
