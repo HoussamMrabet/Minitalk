@@ -6,7 +6,7 @@
 /*   By: hmrabet <hmrabet@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:30:26 by hmrabet           #+#    #+#             */
-/*   Updated: 2024/01/01 15:57:18 by hmrabet          ###   ########.fr       */
+/*   Updated: 2024/01/02 01:05:15 by hmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ int	main(int argc, char **argv)
 	if (check_inputs(argc, argv))
 	{
 		ft_printf("\x1b[31minvalid input!\n\x1b[0m");
-		return (-1);
+		return (1);
 	}
 	id = ft_atoi(argv[1]);
 	if (id <= 0)
 	{
 		ft_printf("\x1b[31minvalid PID!\n\x1b[0m");
-		return (-1);
+		return (1);
 	}
 	while (argv[2][i])
 	{
